@@ -10,36 +10,23 @@ Rules:
 - Use repo docs for current product truth before broader planning memos.
 - Keep detailed conventions in repo docs, not in this file.
 
-## Write-back rule
-
-After every material completion (committed code, schema/config changes, new/changed docs, test suite changes):
-
-1. **Update `CURRENT_STATUS.md` in this repo** to reflect the new present-tense state. Overwrite it, keep it under 30 lines. Skip this if the work was a review or decision that did not change repo state.
-
-2. **Append a completion entry to `Lifehub/SYSTEM/COMPLETION_LOG.md`** (absolute path: `/Users/ryanjameson/Desktop/Lifehub/SYSTEM/COMPLETION_LOG.md`):
-
-```
-## YYYY-MM-DD | [this-repo-name] | Codex
-Done: [what changed, 1-2 sentences]
-Repo: [branch, commit hash]
-Verified: [tests/build status]
-Next: [who acts next and what]
-Refs: [Linear issue, PR, relevant doc paths]
-```
-
-3. **Tell Ryan in your final message:** "Completion logged in `SYSTEM/COMPLETION_LOG.md`; `CURRENT_STATUS.md` updated if applicable."
-
-Do not log: exploratory reads, reverted experiments, formatting fixes, routine Q&A.
-Do not write to `SYSTEM/HANDOFF.md` or `SYSTEM/ACTIVE_WORK_HANDOFFS.md` (deprecated).
+Preserve the no-synthetic-data posture and existing source, identity, and billing boundaries in the repository docs.
 
 ## Codex execution contract
 
-You are the executor. Claude designs and reviews; Ryan decides. Build from the spec; do not redesign. (Full model: `/Users/ryanjameson/Desktop/Lifehub/SYSTEM/CODEX_FIRST.md`.)
+Codex owns authorized work through implementation, verification, GitHub mechanics, and delivery where those stages are in scope. Claude is advisory unless Ryan explicitly requests a review. Complete ordinary implementation choices without introducing another approval stage.
 
-- **Stay in scope.** Do only what the prompt's Goal/paths cover. If the spec is ambiguous or forces a design choice, stop and ask — do not guess.
-- **Self-check against the code, not your summary.** Before reporting, re-read your own diff and describe what the code *actually* does, not what you intended.
-- **Proof, always.** Run the exact verify command from the prompt and paste the real output. Report: files changed + test output + one-line-per-file diff summary.
-- **Never auto-execute a gated item:** shipping anything to a live/production surface, go/no-go on a strategy question, schema/migration or core-engine merges, or any new design. Summarize and hold for Ryan/Claude.
-- **Merge discipline:** confirm state `MERGED` (not draft, not CONFLICTING) before deleting any branch/worktree; never batch cleanup into the merge.
-- **Deploy-verify:** after merge, wait for the deploy/CI run to finish `success`, then confirm the change on the live surface (health endpoint, page, or bundle string as the repo provides).
-- **Guardrails:** writes/migrations proportional to change; keep migration ordering consistent with the default branch; one workstream = one branch = one worktree; never `git add -A` in a worktree with symlinked `node_modules` (they get committed and break CI); on customer-facing surfaces no inflated claims / no "receipts" (use "record") / no advertised caveats; secrets never in tracked files.
+- Start from the current default branch and verify the checkout before editing. Use repository docs for adopted product scope and observed runtime for deployment claims.
+- Respect review-only, proof-only, draft-only, and no-deploy requests. Preserve explicit product, source, launch, and data holds; a settings or documentation change does not authorize their activation.
+- Ask Ryan for genuine product or commercial judgment, privacy or licensing changes, credentials, destructive actions, or unresolved ownership conflicts. Do not ask again for a step already authorized.
+- Read the final diff and run verification appropriate to the change, including required repository gates. Report what changed, the result, and material limitations; distinguish implemented, tested, merged, deployed, and live-verified.
+- Preserve active and dirty worktrees. Use an isolated branch/worktree when needed; keep cleanup separate. Confirm a PR is merged before deleting its branch or worktree.
+- When deployment is in scope, verify the relevant CI/deploy result and the live surface before reporting success. A merged documentation change alone does not require a deployment.
+- Keep writes and migrations proportional, preserve migration ordering against the default branch, and stage intended paths explicitly. Never commit secrets or symlinked dependency directories.
+- Use Altira and Records in new customer-facing language. Preserve compatible technical identifiers, source-backed claims, and the product's documented evidence and data boundaries.
+
+## Write-back rule
+
+Update `CURRENT_STATUS.md` only when settled product/runtime state or a lasting operating boundary changes. Keep it concise and preserve existing facts unless current evidence changes them. A routine instruction edit does not require rewriting product status.
+
+Record a material completion once in the established completion log when available, with a short pointer to its PR or verification evidence. Keep detailed evidence with the work it supports. Do not create duplicate ledgers, log routine reads, or add a mandatory bookkeeping footer to the final answer. Do not revive deprecated handoff files.

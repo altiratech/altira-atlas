@@ -20,7 +20,7 @@ Canonical hosted app:
 - `https://atlas.ryanjameson.me`
 
 Compatibility hostnames:
-- `https://atlas.altiratech.com` and `https://farmland.altiratech.com` keep `/api/*` active while web routes redirect to the canonical app.
+- `https://atlas.altiratech.com` and `https://farmland.altiratech.com` keep `/api/*` active while web routes redirect to `https://altiratech.com/`. The personal application remains available directly at its canonical hostname.
 
 ## Quick Start
 

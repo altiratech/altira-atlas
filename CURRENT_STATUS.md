@@ -15,5 +15,6 @@ Verification:
 - Exact evidence and rollback IDs are recorded in `docs/ATLAS_RYANJAMESON_DOMAIN_VERIFICATION_2026-07-17.md`.
 
 Next:
+- Prepared22October, not deployed: company-host web traffic redirects to the company homepage; personal-host app and company `/api/*` consumers remain.35 routing tests, types, frontend build and Worker dry-run pass. Release must account for the existing automatic smoke script's anonymous-session bootstrap POST.
 - Keep both legacy routes during an observation window; retire them only after an API-client and rollback review.
 - Product UX follow-up remains the Research Workspace queue-mode versus active-memo-mode first-time-user check.

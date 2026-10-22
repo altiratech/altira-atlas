@@ -17,7 +17,9 @@ else
   )
 fi
 
-echo "Checking domain migration"
+COMPANY_BASE="https://altiratech.com"
+
+echo "Checking company web separation and API compatibility"
 echo "  canonical: ${CANONICAL_BASE}"
 
 for legacy_base in "${LEGACY_BASES[@]}"; do
@@ -33,8 +35,8 @@ for legacy_base in "${LEGACY_BASES[@]}"; do
     echo "ERROR: expected ${legacy_base} root status 308, got ${legacy_status}"
     exit 1
   fi
-  if [[ "${legacy_location}" != "${CANONICAL_BASE}/"* ]]; then
-    echo "ERROR: expected ${legacy_base} redirect location to start with ${CANONICAL_BASE}/, got ${legacy_location}"
+  if [[ "${legacy_location}" != "${COMPANY_BASE}/" ]]; then
+    echo "ERROR: expected ${legacy_base} redirect location ${COMPANY_BASE}/, got ${legacy_location}"
     exit 1
   fi
 

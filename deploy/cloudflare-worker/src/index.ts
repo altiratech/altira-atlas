@@ -156,7 +156,6 @@ function summarizeIndustrialSignals(results: Array<{ industrial?: IndustrialScre
 
 app.use('*', cors());
 app.use('*', async (c, next) => {
-  const canonicalHost = (c.env.CANONICAL_HOST ?? '').toLowerCase();
   const legacyHosts = new Set(
     [
       ...(c.env.LEGACY_HOSTS ?? '').split(','),
@@ -169,18 +168,12 @@ app.use('*', async (c, next) => {
     .toLowerCase()
     .replace(/:\d+$/, '');
 
-  // Controlled migration: keep legacy API hosts working while redirecting web traffic.
+  // Keep legacy API clients working without linking company web traffic to the personal app.
   if (
-    canonicalHost &&
     legacyHosts.has(reqHost) &&
     !c.req.path.startsWith('/api/')
   ) {
-    const url = new URL(c.req.url);
-    url.hostname = canonicalHost;
-    if (!url.searchParams.has('legacy_redirect')) {
-      url.searchParams.set('legacy_redirect', '1');
-    }
-    return c.redirect(url.toString(), 308);
+    return c.redirect('https://altiratech.com/', 308);
   }
 
   return next();

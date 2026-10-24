@@ -75,5 +75,5 @@ Use the orchestrator workflow when you want resumable year/state execution with 
 ## Notes
 - Canonical project root remains `Code/active/altira-atlas`.
 - Canonical web domain: `https://atlas.ryanjameson.me`
-- Legacy domain compatibility: `https://atlas.altiratech.com` and `https://farmland.altiratech.com` (`/api/*` remains active; web routes redirect to canonical)
+- Legacy domain compatibility: `https://atlas.altiratech.com` and `https://farmland.altiratech.com` (`/api/*` remains active; web routes redirect to `https://altiratech.com/` without carrying their path or query to the company homepage)
 - Do not commit `node_modules` or `.wrangler` state.
